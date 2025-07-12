@@ -9,6 +9,8 @@ config = read_or_create_json("config.json")
 async def get_config(msg):
     if (msg.from_user.id != config["ADMIN_ID"]):
         if (msg.from_user.id != config["GROUP_ADMIN_ID"]):
+            if (msg.from_user.id != config["RIZVAN_ID"]):
+                return
             return
     
     await msg.answer(str(config))
@@ -33,7 +35,8 @@ async def get_config(msg):
 async def start(msg):
     if (msg.from_user.id != config["ADMIN_ID"]):
         if (msg.from_user.id != config["GROUP_ADMIN_ID"]):
-            return
+            if (msg.from_user.id != config["RIZVAN_ID"]):
+                return
     config["ON_WORK"] = True
     await msg.answer("Бот запущен")
     save_json("config.json", config)
@@ -43,7 +46,8 @@ async def start(msg):
 async def stop(msg):
     if (msg.from_user.id != config["ADMIN_ID"]):
         if (msg.from_user.id != config["GROUP_ADMIN_ID"]):
-            return
+            if (msg.from_user.id != config["RIZVAN_ID"]):
+                return
     config["ON_WORK"] = False
     await msg.answer("Бот остановлен")
     save_json("config.json", config)
@@ -58,7 +62,8 @@ async def allmsg(msg):
         return
     if (msg.from_user.id != config["ADMIN_ID"]):
         if (msg.from_user.id != config["GROUP_ADMIN_ID"]):
-            return
+            if (msg.from_user.id != config["RIZVAN_ID"]):
+                return
     else:
         await msg.answer("Секунду... Генерирую")
         if config["GENERATE_MODE"] == "1": 
